@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jayesh Pandya</title>
+    <link rel="icon" href="./me.jpg" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Keep it in the background */
+            background: #0d1b2a;
+            pointer-events: none; /* Allow mouse events to pass through */
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #fff;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4ECDC4;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .contact-info a {
+            color: #FF9999;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-info a:hover {
+            color: #FF6B6B;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section.full-width {
+            width: 100%;
+        }
+
+        .section h2 {
+            color: #4ECDC4;
+            border-bottom: 2px solid #4ECDC4;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill-category {
+            flex: 1 1 200px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .skill-category strong {
+            color: #FFEEAD;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .project-card {
+            flex: 1 1 400px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: #4ECDC4;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                width: 100%;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="content">
+        <div class="header">
+            <h1>Jayesh Pandya</h1>
+            <div class="contact-info">
+                <a href="tel:+918128597848" target="_blank" title="+91-8128597848" class="hover-title">📞 +91-8128597848</a>
+                <a href="mailto:pandyajayesh1008@gmail.com" target="_blank" title="Mail me" class="hover-title">✉️ pandyajayesh1008@gmail.com</a>
+                <a href="https://linkedin.com/in/jayesh-pandya-ab334b28a" target="_blank" title="https://linkedin.com/in/jayesh-pandya-ab334b28a" class="hover-title">🔗 LinkedIn</a>
+                <a href="https://github.com/PandyaJayesh" target="_blank" title="https://github.com/PandyaJayesh" class="hover-title">👨‍💻 GitHub</a>
+            </div>
+            <style>
+                .title-box {
+                    position: absolute;
+                    background: rgba(0, 0, 0, 0.8);
+                    color: #fff;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    pointer-events: none;
+                    z-index: 1000;
+                    white-space: nowrap;
+                }
+            </style>
+        </div>
+
+        <div class="main-content">
+            <div class="section full-width">
+                <h2>Professional Summary</h2>
+                <p>Recent B.Tech graduate in Information and Communication Technology with strong expertise in C programming, data structures and algorithms (DSA), and networking. Possesses excellent problem-solving skills and a solid foundation in technical concepts, with a passion for developing efficient and scalable solutions.</p>
+            </div>
+
+            <div class="section">
+                <h2>Education</h2>
+                <div>
+                    <h3><a href="https://www.daiict.ac.in/" target="_blank" title="DA-IICT" class="hover-title" style="color: #FFEEAD;">DA-IICT Gandhinagar, Gujarat</a></h3>
+                    
+                    <p><strong>B.Tech</strong> in</p>
+                    <p>Information and Communication Technology</p>
+                    <p><strong>CPI</strong> 7.64/10</p>
+                    <p><strong>Graduation</strong> May 2025</p>
+                    <p><strong>Relevant Courses:</strong></p>
+                    <ul>
+                        <li>Operating Systems</li>
+                        <li>Computer Networks</li>
+                        <li>Data Structures</li>
+                        <li>Software Engineering</li>
+                        <li>DBMS</li>
+                        <li>Design and Analysis of Algorithms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <strong>Programming</strong>
+                        <p>C (Expert), C++ (Proficient), PostgreSQL, Shell Scripting(Basics)</p>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Operating Systems</strong>
+                        <p>Linux (Kernel and User Space)</p>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Version Control</strong>
+                        <p>Git</p>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Familiarity</strong>
+                        <p>Python, Device Drivers</p>
+                    </div>
+                    <div class="skill-category">
+                        <strong>Tools</strong>
+                        <p>VS code, PG Admin</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Internships</h2>
+                <div class="project-card">
+                    <h3>DA-IICT - Summer Research Intern</h3>
+                    <p>May 2024 – July 2024</p>
+                    <ul>
+                        <li>Established and automated an MPI cluster for distributed computing using Linux systems.</li>
+                        <li>Dynamic IP management enabled using DHCP for seamless integration in Linux environments.</li>
+                        <li>Automated cluster setup using shell scripts.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section full-width">
+                <h2>Academic Projects</h2>
+                <div class="projects-container">
+                    <div class="project-card">
+                        <h3>Bank Data Management System</h3>
+                        <ul>
+                            <li>Designed a system supporting multiple account types, card facilities, transaction tracking, and loan management.</li>
+                            <li>Developed a database schema and implemented SQL queries for efficient data management.</li>
+                            <li>Technologies Used: PostgreSQL, PgAdmin</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Simple File System</h3>
+                        <ul>
+                            <li>Implemented a simple file system in C that supports basic file and directory operations.</li>
+                            <li>Enabled commands such as md, rm, ls, cd, and stats for directories, as well as create, rm, and display for files.</li>
+                            <li>Guided by Prof. Anish Mathuria (DA-IICT).</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>TCP Variant Comparison</h3>
+                        <ul>
+                            <li>Compared TCP variants in a wireless environment using ns-3, evaluating performance under challenging network conditions.</li>
+                            <li>Measured parameters like throughput, latency, and packet loss across TCP implementations.</li>
+                            <li>Analyzed and reported findings to assess TCP performance in wireless scenarios.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Concurrent Fault Simulation</h3>
+                        <ul>
+                            <li>Simulated concurrent faults in circuits to validate VLSI systems.</li>
+                            <li>Focused on optimizing memory and computational performance.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration Parameters
+        const CONFIG = {
+            PARTICLE_COUNT: 150,
+            PARTICLE_RADIUS: 2.5,
+            
+            // Color parameters
+            COLORS: [
+                '#FF6B6B', // Coral
+                '#4ECDC4', // Turquoise
+                '#45B7D1', // Sky Blue
+                '#96CEB4', // Mint
+                '#FFEEAD', // Cream
+                '#FF9999'  // Pink
+            ],
+            
+            CONNECTION_THRESHOLD: 95,
+            LINE_OPACITY_DIVIDER: 120,
+            
+            INITIAL_VELOCITY: 0.5,
+            MAX_VELOCITY: 0.8,
+            DECELERATION: 1,
+            
+            DIRECTION_CHANGE_MIN: 10,
+            DIRECTION_CHANGE_MAX: 20,
+            DIRECTION_CHANGE_MAGNITUDE: 0.05,
+            CONTINUOUS_RANDOM_MOTION: 0.05,
+            
+            CURSOR_INFLUENCE: 0.05, // Increased influence
+            CURSOR_MOMENTUM: 0.1 // Increased momentum
+        };
+
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velocityX = (Math.random() - 0.5) * CONFIG.INITIAL_VELOCITY;
+                this.velocityY = (Math.random() - 0.5) * CONFIG.INITIAL_VELOCITY;
+                this.radius = CONFIG.PARTICLE_RADIUS;
+                this.directionChangeTimer = 0;
+                this.directionChangeDuration = Math.random() * CONFIG.DIRECTION_CHANGE_MAX + CONFIG.DIRECTION_CHANGE_MIN;
+                this.color = CONFIG.COLORS[Math.floor(Math.random() * CONFIG.COLORS.length)];
+                
+                // Convert hex to RGB for line gradients
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.color);
+                this.rgb = result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : null;
+            }
+
+            update(cursorEffect) {
+                this.directionChangeTimer++;
+                if (this.directionChangeTimer >= this.directionChangeDuration) {
+                    this.velocityX += (Math.random() - 0.5) * CONFIG.DIRECTION_CHANGE_MAGNITUDE;
+                    this.velocityY += (Math.random() - 0.5) * CONFIG.DIRECTION_CHANGE_MAGNITUDE;
+                    this.directionChangeTimer = 0;
+                    this.directionChangeDuration = Math.random() * CONFIG.DIRECTION_CHANGE_MAX + CONFIG.DIRECTION_CHANGE_MIN;
+                }
+
+                this.velocityX += (Math.random() - 0.5) * CONFIG.CONTINUOUS_RANDOM_MOTION;
+                this.velocityY += (Math.random() - 0.5) * CONFIG.CONTINUOUS_RANDOM_MOTION;
+
+                const currentVelocity = Math.sqrt(this.velocityX * this.velocityX + this.velocityY * this.velocityY);
+                if (currentVelocity > CONFIG.MAX_VELOCITY) {
+                    this.velocityX = (this.velocityX / currentVelocity) * CONFIG.MAX_VELOCITY;
+                    this.velocityY = (this.velocityY / currentVelocity) * CONFIG.MAX_VELOCITY;
+                }
+
+                if (cursorEffect) {
+                    this.velocityX += cursorEffect.x * CONFIG.CURSOR_INFLUENCE;
+                    this.velocityY += cursorEffect.y * CONFIG.CURSOR_INFLUENCE;
+                }
+
+                this.x += this.velocityX;
+                this.y += this.velocityY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+
+                this.velocityX *= CONFIG.DECELERATION;
+                this.velocityY *= CONFIG.DECELERATION;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        const particles = Array.from({ length: CONFIG.PARTICLE_COUNT }, () => new Particle());
+        let lastMousePos = { x: 0, y: 0 };
+        let cursorEffect = null;
+
+        canvas.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            cursorEffect = {
+                x: (mouseX - lastMousePos.x) * CONFIG.CURSOR_MOMENTUM,
+                y: (mouseY - lastMousePos.y) * CONFIG.CURSOR_MOMENTUM
+            };
+
+            lastMousePos = { x: mouseX, y: mouseY };
+        });
+
+        document.querySelectorAll('.hover-title').forEach(link => {
+            let titleBox;
+            link.addEventListener('mousemove', (e) => {
+                if (!titleBox) {
+                    titleBox = document.createElement('div');
+                    titleBox.className = 'title-box';
+                    titleBox.innerText = link.title;
+                    document.body.appendChild(titleBox);
+                }
+                titleBox.style.left = `${e.pageX + 10}px`;
+                titleBox.style.top = `${e.pageY + 10}px`;
+            });
+            link.addEventListener('mouseleave', () => {
+                if (titleBox) {
+                    titleBox.remove();
+                    titleBox = null;
+                }
+            });
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update(cursorEffect);
+                particle.draw();
+            });
+
+            particles.forEach((p1, i) => {
+                particles.slice(i + 1).forEach(p2 => {
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < CONFIG.CONNECTION_THRESHOLD) {
+                        const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+                        gradient.addColorStop(0, `rgba(${p1.rgb.r}, ${p1.rgb.g}, ${p1.rgb.b}, ${1 - distance / CONFIG.LINE_OPACITY_DIVIDER})`);
+                        gradient.addColorStop(1, `rgba(${p2.rgb.r}, ${p2.rgb.g}, ${p2.rgb.b}, ${1 - distance / CONFIG.LINE_OPACITY_DIVIDER})`);
+
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = gradient;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            cursorEffect = null;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
